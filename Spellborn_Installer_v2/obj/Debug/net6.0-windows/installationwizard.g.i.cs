@@ -78,7 +78,7 @@ namespace Spellborn_Installer_v2 {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Spellborn_Installer_v2;component/installationwizard.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Spellborn_Installer_v2;V2.0.2.0;component/installationwizard.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\installationwizard.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
