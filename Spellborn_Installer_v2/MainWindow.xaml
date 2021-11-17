@@ -107,7 +107,7 @@
     </FrameworkElement.Resources>
     <Grid>
         <Canvas>
-            <Image Height="663" Source="/splborn_uirwrk.png" Canvas.Left="14" Canvas.Top="45" Panel.ZIndex="-1" Stretch="UniformToFill" StretchDirection="UpOnly" Width="1330" />
+            <Image Height="663" Source="/splborn_uirwrkartback.png" Canvas.Left="14" Canvas.Top="45" Panel.ZIndex="-1" Stretch="UniformToFill" StretchDirection="UpOnly" Width="1330" />
             <Label Name="versionLabel" Content="Currently installed:" Canvas.Left="879" Canvas.Top="620" Width="162" Height="32" FontWeight="Normal" Foreground="White" Background="{x:Null}" />
             <Label x:Name="lbl_installedVersion" Canvas.Left="980" Canvas.Top="652" FontWeight="Bold" Width="61" Height="26" Foreground="White" Background="{x:Null}" />
             <DockPanel />
@@ -119,7 +119,7 @@
                 </ItemsControl.ItemContainerStyle>
                 <TabItem Name="welcome" Header="Welcome">
                     <Grid HorizontalAlignment="Center" Width="1000" Height="374" VerticalAlignment="Center">
-                        <wv2:WebView2 Name="browser" Panel.ZIndex="5" Margin="-2,17,33,0" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                        <wv2:WebView2 Name="browser" Panel.ZIndex="5" Margin="-2,17,33,0" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Visibility="Hidden" />
                     </Grid>
                 </TabItem>
                 <TabItem Name="settings" Header="Settings">
@@ -209,7 +209,17 @@
                     <ImageBrush ImageSource="/cog.png" />
                 </Control.Background>
             </Button>
-            <ProgressBar x:Name="progressBar" Height="58" Canvas.Left="28" Canvas.Top="620" Width="846" Foreground="#FFFF5200"/>
+            <ProgressBar x:Name="progressBar" Height="58" Canvas.Left="28" Canvas.Top="620" Width="846" Background="White" BorderBrush="#FF0E0001" Orientation="Vertical">
+                <ProgressBar.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFD38D5F"/>
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FFEC7F38" Offset="0"/>
+                        <GradientStop Color="#FFFDA369" Offset="0.987"/>
+                        <GradientStop Color="#FFDC8146" Offset="0.487"/>
+                    </LinearGradientBrush>
+                </ProgressBar.Foreground>
+            </ProgressBar>
             <Button x:Name="lbl_progressBar" Content="Button" Canvas.Left="1046" Canvas.Top="620" Click="Lbl_progressBar_Click" BorderBrush="{x:Null}" Foreground="White" Height="58" Width="285" Background="Black"/>
             <Button x:Name="btnMinimize" Content="-" Canvas.Left="1245" Height="34" Width="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Canvas.Top="46" FontSize="25" Click="Btn_Minimize_Click"/>
             <Button x:Name="btnClose1" Content="X" Canvas.Left="1288" Height="32" Width="48" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Canvas.Top="48" FontSize="20" Click="BtnClose_Click" RenderTransformOrigin="0.465,0.155"/>

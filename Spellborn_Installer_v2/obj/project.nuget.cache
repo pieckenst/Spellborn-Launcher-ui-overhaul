@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pFnT4j13p7YyvHV8aH+y4MZNj98hiKGGHWZqL0tGuq9Q31WdcQNrF1IPOXv6QCT/pDW7lQUlEzPolHLpU3jUiQ==",
+  "dgSpecHash": "L3HhU+2buyUwh0UMuUYfk6ov+ivmHY1SPYtYJr0krnJX1dslRWzBqZbKBVcxw26Ot/SxvwQE/wJYsFXzfW8PbA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Андрей\\source\\repos\\Spellborn_Installer_v2\\Spellborn_Installer_v2\\Spellborn_Installer_v2.csproj",
+  "projectFilePath": "D:\\git\\Spellborn-Launcher-ui-overhaul\\Spellborn_Installer_v2\\Spellborn_Installer_v2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Андрей\\.nuget\\packages\\autoupdater.net.official\\1.7.0\\autoupdater.net.official.1.7.0.nupkg.sha512",
     "C:\\Users\\Андрей\\.nuget\\packages\\dotnetzip\\1.16.0\\dotnetzip.1.16.0.nupkg.sha512",
