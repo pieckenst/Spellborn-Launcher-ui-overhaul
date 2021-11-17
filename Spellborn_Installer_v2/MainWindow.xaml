@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window x:Class="Spellborn_Installer_v2.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf" Title="The Chronicles of Spellborn" Height="763.175" Width="1354" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None" xmlns:spellborn_installer_v2="clr-namespace:Spellborn_Installer_v2;assembly=launcher" Background="{x:Null}" Foreground="{x:Null}" MouseDown="MainWindow_OnMouseDown">
+    <FrameworkElement.Resources>
+        <ResourceDictionary>
+            <ControlTemplate x:Key="ProgressBarControlTemplate1" TargetType="{x:Type ProgressBar}">
+                <Grid Name="TemplateRoot">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Determinate" />
+                            <VisualState x:Name="Indeterminate">
+                                <Storyboard RepeatBehavior="Forever">
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="Animation">
+                                        <EasingDoubleKeyFrame KeyTime="0" Value="0.25" />
+                                        <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.25" />
+                                        <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.25" />
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <PointAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)" Storyboard.TargetName="Animation">
+                                        <EasingPointKeyFrame KeyTime="0" Value="-0.5,0.5" />
+                                        <EasingPointKeyFrame KeyTime="0:0:1" Value="0.5,0.5" />
+                                        <EasingPointKeyFrame KeyTime="0:0:2" Value="1.5,0.5" />
+                                    </PointAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" />
+                    <Rectangle Name="PART_Track" />
+                    <Grid Name="PART_Indicator" ClipToBounds="True" HorizontalAlignment="Left">
+                        <Rectangle Name="Indicator" Fill="{TemplateBinding Foreground}" />
+                        <Rectangle Name="Animation" Fill="{TemplateBinding Foreground}" RenderTransformOrigin="0.5,0.5">
+                            <UIElement.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform />
+                                    <SkewTransform />
+                                    <RotateTransform />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </UIElement.RenderTransform>
+                        </Rectangle>
+                    </Grid>
+                </Grid>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="ProgressBar.Orientation" Value="Vertical">
+                        <Setter TargetName="TemplateRoot" Property="FrameworkElement.LayoutTransform">
+                            <Setter.Value>
+                                <RotateTransform Angle="-90" />
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                    <Trigger Property="ProgressBar.IsIndeterminate" Value="True">
+                        <Setter TargetName="Indicator" Property="UIElement.Visibility" Value="Collapsed" />
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+            <Style x:Key="FocusVisual">
+                <Setter Property="Control.Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource SystemColors.ControlTextBrushKey}" StrokeThickness="1" StrokeDashArray="1 2" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD" />
+            <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070" />
+            <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD" />
+            <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1" />
+            <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6" />
+            <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B" />
+            <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4" />
+            <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5" />
+            <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383" />
+            <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+                <Setter Property="FrameworkElement.FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+                <Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
+                <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
+                <Setter Property="Foreground" Value="{DynamicResource SystemColors.ControlTextBrushKey}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="Padding" Value="1" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                <ContentPresenter Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="Button.IsDefaulted" Value="True">
+                                    <Setter TargetName="border" Value="{DynamicResource SystemColors.HighlightBrushKey}" Property="Border.BorderBrush" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="border" Property="Border.Background" Value="{StaticResource Button.Pressed.Background}" />
+                                    <Setter TargetName="border" Property="Border.BorderBrush" Value="{StaticResource Button.Pressed.Border}" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="border" Property="Border.Background" Value="{StaticResource Button.Disabled.Background}" />
+                                    <Setter TargetName="border" Property="Border.BorderBrush" Value="{StaticResource Button.Disabled.Border}" />
+                                    <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{StaticResource Button.Disabled.Foreground}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </FrameworkElement.Resources>
+    <Grid>
+        <Canvas>
+            <Image Height="663" Source="/splborn_uirwrk.png" Canvas.Left="14" Canvas.Top="45" Panel.ZIndex="-1" Stretch="UniformToFill" StretchDirection="UpOnly" Width="1330" />
+            <Label Name="versionLabel" Content="Currently installed:" Canvas.Left="879" Canvas.Top="620" Width="162" Height="32" FontWeight="Normal" Foreground="White" Background="{x:Null}" />
+            <Label x:Name="lbl_installedVersion" Canvas.Left="980" Canvas.Top="652" FontWeight="Bold" Width="61" Height="26" Foreground="White" Background="{x:Null}" />
+            <DockPanel />
+            <TabControl Name="contentBox" Height="474" Canvas.Left="28" Canvas.Top="118" Width="1303" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="{x:Type TabItem}">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <TabItem Name="welcome" Header="Welcome">
+                    <Grid HorizontalAlignment="Center" Width="1000" Height="374" VerticalAlignment="Center">
+                        <wv2:WebView2 Name="browser" Panel.ZIndex="5" Margin="-2,17,33,0" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                    </Grid>
+                </TabItem>
+                <TabItem Name="settings" Header="Settings">
+                    <Grid HorizontalAlignment="Center" Width="1000" Height="374" VerticalAlignment="Center">
+                        <Canvas>
+                            <TextBlock Canvas.Left="14" TextWrapping="Wrap" Canvas.Top="30" Height="16" Width="450" FontWeight="Bold" Foreground="#FFFFFFFF"><Run Language="en-gb" Text="This is still a work in progress, but this can help you resolve issues." /></TextBlock>
+                            <Grid x:Name="grStep11" Height="351" Canvas.Left="301" Canvas.Top="212" Width="445" />
+                        </Canvas>
+                        <Rectangle Fill="#FF380D03" HorizontalAlignment="Left" Height="105" Margin="10,53,0,0" Stroke="#FF000000" VerticalAlignment="Top" Width="1000" Opacity="0.5" />
+                        <TextBlock x:Name="lbl_installLocationx" TextWrapping="Wrap" FontSize="11" Margin="19,263,53,84" FontFamily="Consolas" FontWeight="Bold" Foreground="#FFFFFFFF" />
+                        <TextBlock x:Name="lbl_downloadProgressx" TextWrapping="Wrap" FontSize="8" Margin="723,474,258,245" />
+                        <Button x:Name="btn_ForceRedownload" Content="Force redownload" FontSize="14" Panel.ZIndex="5" Margin="22,115,50,225" FontWeight="Bold" Click="btn_ForceRedownload_Click" />
+                        <TextBlock TextWrapping="Wrap" Panel.ZIndex="5" Margin="16,60,29,291" FontSize="14" FontWeight="Bold" Foreground="#FFDADADA" Width="957"><Run Language="en-gb" Text="Force re-download of game files" /><LineBreak /><Run /><LineBreak /><Run /></TextBlock>
+                        <TextBlock TextWrapping="Wrap" Margin="16,80,56,259" Foreground="#FFBBBBBB" FontWeight="Bold" FontSize="11"><Run Text="This will reset the currently installed version and will force a full re-download." /><LineBreak /><Run Text="Re" /><Run Text=" "/><Run Language="en-gb" Text="quires restart of the launcher." /><LineBreak /><Run /></TextBlock>
+                        <Button x:Name="btnClosex" Content="" HorizontalAlignment="Center" Margin="839,92,0,0" VerticalAlignment="Center" BorderBrush="{x:Null}" Click="BtnClose_Click" Foreground="{x:Null}" Background="{x:Null}"/>
+                        <Rectangle Fill="#FF380D03" HorizontalAlignment="Left" Height="127" Margin="10,163,0,0" Stroke="#FF000000" VerticalAlignment="Top" Width="1000" Opacity="0.5" />
+                        <TextBlock TextWrapping="Wrap" Panel.ZIndex="5" Margin="16,168,29,184" FontSize="14" FontWeight="Bold" Foreground="#FFDADADA"><Run Language="en-gb" Text="Reset installation path" /></TextBlock>
+                        <TextBlock TextWrapping="Wrap" Margin="16,195,56,133" Foreground="#FFBBBBBB" FontWeight="Bold" FontSize="11"><Run Text="This will remove the installation path, after which the launcher allows you to pick a new location. Keep in mind that this will " /><Run Text=" "/><Run Text="NOT move the files and you will need to force redownload or move the files yourself." /><LineBreak /></TextBlock>
+
+                        <Button x:Name="btn_ResetinstallationPath" Content="Reset installation path" FontSize="14" FontWeight="Bold" Margin="22,245,50,97" Click="btn_ResetinstallationPath_Click" />
+                        <Button x:Name="btn_BackToMain" Content="X" FontSize="22" Panel.ZIndex="17" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="Black" Click="btn_BackToMain_Click" Background="{x:Null}" Margin="950,-4,0,294" Width="20" Height="38"/>
+                        <Rectangle Fill="#FF380D03" HorizontalAlignment="Left" Height="55" Margin="10,300,0,0" Stroke="#FF000000" VerticalAlignment="Top" Width="432" Opacity="0.5" />
+                        <TextBlock TextWrapping="Wrap" Panel.ZIndex="5" Margin="16,300,298,51" FontSize="14" FontWeight="Bold" Foreground="#FFDADADA"><Run Language="en-gb" Text="Change game language" /><LineBreak /><Run /><LineBreak /><Run /></TextBlock>
+                        <ComboBox x:Name="cbx_gameLanguage" HorizontalAlignment="Left"  SelectedValuePath="Content" SelectionChanged="ComboBox_SelectionChanged" Margin="184,251,6,-2" Width="250" Height="19" IsDropDownOpen="True">
+                            <ComboBoxItem Content="English" />
+                            <ComboBoxItem Content="German" />
+                            <ComboBoxItem Content="French" />
+                            <ComboBoxItem Content="Russian" />
+                            <ComboBoxItem Content="Korean" />
+                            <ComboBoxItem Content="Chinese" />
+                        </ComboBox>
+                        <TextBlock TextWrapping="Wrap" Margin="22,325,50,35" Foreground="#FFBBBBBB" FontWeight="Bold" FontSize="11"><Run Language="en-gb" Text="The launcher needs to be launched as administrator for this to work." /></TextBlock>
+
+                    </Grid>
+                </TabItem>
+                <TabItem Name="install" Header="Install wizard">
+                    <Grid HorizontalAlignment="Center" Width="480" Height="374" VerticalAlignment="Center">
+                        <Canvas>
+                            <TextBlock Canvas.Left="22" TextWrapping="Wrap" Canvas.Top="60" Height="16" Width="436" FontWeight="Bold">
+                <Run Text="It looks like it's the first time you are running this launcher - welcome!" Foreground="White" />
+                <LineBreak />
+                <Run Text="In order to get started, we'll need to choose the installation folder." />
+                <LineBreak />
+                <Run />
+                            </TextBlock>
+                            <Grid Name="grStep1" Height="351" Canvas.Left="301" Canvas.Top="212" Width="445" />
+                            <Button Name="btn_confirmInstallationLocation" Content="Confirm install location" Canvas.Left="70" Canvas.Top="318" Width="340" FontSize="14" Height="27" FontWeight="Bold" IsEnabled="False" Click="btn_confirmInstallationLocation_Click" Background="#FF0A0000" Foreground="Black" />
+                            <Image Height="46" Canvas.Left="31" Canvas.Top="19" Width="375" Source="Resources/welcome-title.png" Stretch="Fill" />
+                            <Rectangle Fill="#FF380D03" Height="68" Canvas.Left="10" Stroke="#FF000000" Canvas.Top="243" Width="421" Opacity="0.7" />
+                        </Canvas>
+                        <Rectangle Fill="#FF380D03" HorizontalAlignment="Left" Height="151" Margin="9,81,0,0" Stroke="#FF000000" VerticalAlignment="Top" Width="432" Opacity="0.5" />
+                        <TextBlock TextWrapping="Wrap" FontSize="11" Margin="16,244,38,113" Text="You have chosen this path:" Foreground="#FFD3D3D3" />
+                        <TextBlock Name="lbl_installLocation" TextWrapping="Wrap" FontSize="11" Margin="19,263,53,84" FontFamily="Consolas" FontWeight="Bold" Foreground="#FFFFFFFF" />
+                        <TextBlock Name="lbl_downloadProgress" TextWrapping="Wrap" FontSize="8" Margin="723,474,258,245" />
+                        <TextBlock TextWrapping="Wrap" FontSize="11" Margin="16,287,59,70" Text="If this is correct, click the button below and we'll get started!" Foreground="#FFFFFFFF" />
+                        <Image HorizontalAlignment="Left" Height="29" Margin="783,90,0,0" VerticalAlignment="Top" Width="95" Source="Resources/minimizeclose.png" />
+                        <Button Name="btn_selectInstallDir" Content="Select installation directory" FontSize="14" Panel.ZIndex="5" Margin="19,187,53,153" FontWeight="Bold" Click="Btn_selectInstallDir_OnClick" />
+                        <TextBlock TextWrapping="Wrap" Panel.ZIndex="5" Margin="19,83,26,268" FontSize="14" FontWeight="Bold" Foreground="#FFDADADA">
+              <Run Text="To continue, please select the installation directory." />
+              <LineBreak />
+              <Run />
+              <LineBreak />
+              <Run />
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" Margin="19,104,53,192" Foreground="#FFBBBBBB" FontWeight="Bold" FontSize="11">
+              <Run Text="The Chronicles of Spellborn currently does not support installation to Program Files due to permission issues and the fact that the game is very old." />
+              <LineBreak />
+              <Run />
+              <LineBreak />
+              <Run Text="The folder 'The Chronicles of Spellborn" />
+              <Run Text="'" />
+              <Run Text=" will be created automatically." />
+              <LineBreak />
+              <Run Text="Our suggestion is to use C:\Games or on another disk." />
+                        </TextBlock>
+                        <Button Name="btnClose" Content="" HorizontalAlignment="Left" Margin="839,92,0,0" VerticalAlignment="Top" Width="31" BorderBrush="{x:Null}" Click="BtnClose_Click">
+                            <Control.Background>
+                                <SolidColorBrush Color="#FFDDDDDD" Opacity="0" />
+                            </Control.Background>
+                        </Button>
+                    </Grid>
+                </TabItem>
+                <Label Content="Label"/>
+            </TabControl>
+            <Button Name="btn_Settings" Content="" Canvas.Left="1208" Canvas.Top="46" Width="32" Height="34" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="btn_Settings_Click" RenderTransformOrigin="0.266,0.318">
+                <Control.Background>
+                    <ImageBrush ImageSource="/cog.png" />
+                </Control.Background>
+            </Button>
+            <ProgressBar x:Name="progressBar" Height="58" Canvas.Left="28" Canvas.Top="620" Width="846" Foreground="#FFFF5200"/>
+            <Button x:Name="lbl_progressBar" Content="Button" Canvas.Left="1046" Canvas.Top="620" Click="Lbl_progressBar_Click" BorderBrush="{x:Null}" Foreground="White" Height="58" Width="285" Background="Black"/>
+            <Button x:Name="btnMinimize" Content="-" Canvas.Left="1245" Height="34" Width="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Canvas.Top="46" FontSize="25" Click="Btn_Minimize_Click"/>
+            <Button x:Name="btnClose1" Content="X" Canvas.Left="1288" Height="32" Width="48" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Canvas.Top="48" FontSize="20" Click="BtnClose_Click" RenderTransformOrigin="0.465,0.155"/>
+            <Label x:Name="gamelabeltext" Content="The Chronicles Of Spellborn Launcher" Canvas.Left="28" Canvas.Top="50" Foreground="White" FontSize="15"/>
+            <Label Content="Launcher Version" Canvas.Left="879" Canvas.Top="652" Foreground="White" Background="{x:Null}"/>
+        </Canvas>
+    </Grid>
+</Window>
