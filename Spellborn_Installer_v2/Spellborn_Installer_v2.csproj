@@ -14,6 +14,8 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="cog.png" />
+    <None Remove="cogblack.png" />
+    <None Remove="roundrect.png" />
     <None Remove="splborn_uirwrk.png" />
     <None Remove="splborn_uirwrkartback.png" />
   </ItemGroup>
@@ -24,9 +26,11 @@
   <ItemGroup>
     <Resource Include="app.ico" />
     <Resource Include="cog.png" />
+    <Resource Include="cogblack.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="launcher_bg_trans.png" />
+    <Resource Include="roundrect.png" />
     <Resource Include="splborn_uirwrk.png" />
     <Resource Include="splborn_uirwrkartback.png" />
   </ItemGroup>

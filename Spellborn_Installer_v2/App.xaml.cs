@@ -18,11 +18,30 @@ namespace Spellborn_Installer_v2
     {
         private dynamic launcher;
 
+        public static string[] Args;
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            string s = "-compact";
             AutoUpdater.RunUpdateAsAdmin = false;
             AutoUpdater.Start("https://files.spellborn.org/launcher/launcher2-updates.xml");
-            new MainWindow().Show();
+            if (e.Args.Length > 0) {
+                if (e.Args[0] == "-compact")
+                {
+                    new Compactui().Show();
+                }
+                else
+                {
+                    new MainWindow().Show();
+                }
+
+            }
+            else
+            {
+                new MainWindow().Show();
+            }
+
+
+
         }
 
         [DebuggerNonUserCode]

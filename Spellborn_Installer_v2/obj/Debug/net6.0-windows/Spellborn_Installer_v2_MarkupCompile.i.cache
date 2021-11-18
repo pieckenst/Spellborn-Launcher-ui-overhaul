@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 D:\git\Spellborn-Launcher-ui-overhaul\Spellborn_Installer_v2\App.xaml
-31361882431
+41660982782
 3962867059
-14199606101
+15-2096170931
 234346595125
-installationwizard.xaml;launcherpatch.xaml;MainWindow.xaml;
+Compactui.xaml;installationwizard.xaml;launcherpatch.xaml;MainWindow.xaml;
 
 False
 

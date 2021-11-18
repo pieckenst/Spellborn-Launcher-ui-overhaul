@@ -168,7 +168,6 @@ C:\Users\Андрей\source\repos\Spellborn_Installer_v2\Spellborn_Installer_v2
 C:\Users\Андрей\source\repos\Spellborn_Installer_v2\Spellborn_Installer_v2\obj\Debug\net6.0-windows\ref\Spellborn_Installer_v2.dll
 C:\Users\Андрей\source\repos\Spellborn_Installer_v2\Spellborn_Installer_v2\obj\Debug\net6.0-windows\Spellborn_Installer_v2.pdb
 C:\Users\Андрей\source\repos\Spellborn_Installer_v2\Spellborn_Installer_v2\obj\Debug\net6.0-windows\Spellborn_Installer_v2.genruntimeconfig.cache
-D:\git\Spellborn-Launcher-ui-overhaul\Spellborn_Installer_v2\obj\Debug\net6.0-windows\Spellborn_Installer_v2.csproj.AssemblyReference.cache
 D:\git\Spellborn-Launcher-ui-overhaul\Spellborn_Installer_v2\obj\Debug\net6.0-windows\MainWindow.baml
 D:\git\Spellborn-Launcher-ui-overhaul\Spellborn_Installer_v2\obj\Debug\net6.0-windows\installationwizard.g.cs
 D:\git\Spellborn-Launcher-ui-overhaul\Spellborn_Installer_v2\obj\Debug\net6.0-windows\launcherpatch.g.cs
@@ -339,3 +338,5 @@ D:\git\Spellborn-Launcher-ui-overhaul\Spellborn_Installer_v2\obj\Debug\net6.0-wi
 D:\git\Spellborn-Launcher-ui-overhaul\Spellborn_Installer_v2\obj\Debug\net6.0-windows\Spellborn_Installer_v2.csproj.CoreCompileInputs.cache
 D:\git\Spellborn-Launcher-ui-overhaul\Spellborn_Installer_v2\obj\Debug\net6.0-windows\Spellborn_Installer_v2.csproj.CopyComplete
 D:\git\Spellborn-Launcher-ui-overhaul\Spellborn_Installer_v2\obj\Debug\net6.0-windows\Spellborn_Installer_v2.genruntimeconfig.cache
+D:\git\Spellborn-Launcher-ui-overhaul\Spellborn_Installer_v2\obj\Debug\net6.0-windows\Compactui.baml
+D:\git\Spellborn-Launcher-ui-overhaul\Spellborn_Installer_v2\obj\Debug\net6.0-windows\Compactui.g.cs
